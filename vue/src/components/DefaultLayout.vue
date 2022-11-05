@@ -80,13 +80,10 @@
   <script>
     import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
     import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+    import { useStore } from 'vuex'
+    import { computed } from 'vue'
+
     
-    const user = {
-        name: 'Tom Cook',
-        email: 'tom@example.com',
-        imageUrl:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    }
     const navigation = [
         { name: 'Dashboard', href: '#', current: true },
         { name: 'Team', href: '#', current: false },
@@ -113,8 +110,9 @@
             XMarkIcon
         },
         setup() {
+            const store = useStore();
             return {
-                user,
+                user: computed(() => store.state.user.data),
                 navigation,
                 userNavigation
             }
